@@ -57,7 +57,7 @@ async function listen() {
 
     bot.onText(/\/start/g, (msg, match) => {
         const chatId = msg.chat.id
-        bot.sendMessage(chatId, "歡迎使用BTSNotify，有任何問題請輸入 /help")
+        bot.sendMessage(chatId, "歡迎使用BTSNotify，有任何問題請輸入 /help 此BOT不會主動推播BTS相關訊息請加入群組\n https://t.me/joinchat/jASua81VujIxYmE1")
     })
 
     // bot.on("message", (msg) => {
