@@ -1,7 +1,7 @@
 import moment from "moment"
 import { siteMapData, redirectToBTS } from "./core"
 import { hasBTSContext, isBTSUrl } from "../lib"
-import { pushMessageToGroup } from "../notify/telegram"
+import { pushMessageToChannel } from "../notify/telegram"
 
 const TIMEOUT = 5 * 1000 // 5000 ms
 
@@ -19,16 +19,16 @@ export async function init() {
             clearInterval(timer)
             BTSing = true
             //透過telegram 送訊息給group
-            pushMessageToGroup(makeMessage(result))
+            pushMessageToChannel(makeMessage(result))
         }
         // 判斷方式二
-        let result2 = await isRedirectToBTS()
+        const result2 = await isRedirectToBTS()
         if (result2 !== false) {
             //終於開始拉
             clearInterval(timer)
             BTSing = true
             //透過telegram 送訊息給group
-            pushMessageToGroup(makeMessage(result2))
+            pushMessageToChannel(makeMessage(result2))
         }
     }, TIMEOUT)
 }

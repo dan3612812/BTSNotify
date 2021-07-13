@@ -4,11 +4,17 @@
 2. 根據 `https://www.apple.com/tw/sitemap` 頁面上的元件判斷
 3. 在美國 apple 官網`https://apple.com/shop/goto/educationrouting`會轉向到`https://www.apple.com/us-hed/shop/back-to-school`
 
-# 加入 Telegram 群組接收通知
+# 加入 Telegram 頻道接收最新BTS消息!
+https://t.me/joinchat/hoFz6COPNu4wOWJl
 
+此頻道只有BOT跟擁有者可以發送訊息，讓你不會被其他訊息騷擾!!!
+# 加入 Telegram 群組討論專案問題吧!
 https://t.me/joinchat/jASua81VujIxYmE1
 
-此群組只有BOT跟擁有者可以發送訊息
+對於這個專案問題及建議歡迎加入討論 e.g.
+- 怎麼知道BTS上架了?
+- 幾秒會更新一次?
+
 
 # 與BOT聊天
 他不會理你 放心吧

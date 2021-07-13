@@ -5,8 +5,12 @@ import { isBTS } from "../lib"
 import { lastCheckDate, BTSing } from "../crawler"
 
 const TOKEN = process.env.TELEGRAM_TOKEN as string
-const GROUP = process.env.TELEGRAM_GROUP as string
+// const GROUP = process.env.TELEGRAM_GROUP as string
+const CHANNEL_ID = process.env.TELEGRAM_CHANNEL as string
+const CHANNEL_URL = process.env.TELEGRAM_CHANNEL_URL as string
+const GROUP_URL = process.env.TELEGRAM_GROUP_URL as string
 const SELFBOTID = parseInt(process.env.TELEGRAM_SELFBOTID as string)
+
 
 let bot: TelegramBot | undefined
 
@@ -29,11 +33,12 @@ async function listen() {
     bot.onText(/\/help/g, (msg, match) => {
         const chatId = msg.chat.id
         //TODO 修改底下的說明
-        bot.sendMessage(chatId, "還沒寫好啦 在等等...")
+        bot.sendMessage(chatId, "還沒寫好啦 在等等...\n" + `有建議? 有問題? 有疑問? 加入討論組解決你的問題吧!!\n${GROUP_URL}`)
     })
     bot.onText(/\/status/g, (msg, match) => {
         const chatId = msg.chat.id
-        const message = `最後檢查時間:${lastCheckDate}\nBTS${BTSing ? "開始了拉還在睡!" : "殘念~還未開始\n快加入群組接收第一手的通知!https://t.me/joinchat/jASua81VujIxYmE1"}`
+        const message = `最後檢查時間:${lastCheckDate}\n` +
+            `BTS${BTSing ? "開始了拉還在睡!" : "還未開始喔!殘念~\n快加入頻道接收BTS第一手的通知!" + CHANNEL_URL} \n`
         bot.sendMessage(chatId, message)
     })
     bot.onText(/\/report(.)*/g, async (msg) => {
@@ -43,7 +48,7 @@ async function listen() {
         const match = regex.exec(event)
         const url = trim(match !== null ? match[1] : " ")
         if (url.length < 17) {
-            bot.sendMessage(chatId,"type like `/report https://apple.com/tw/back-to-school`")
+            bot.sendMessage(chatId, "type like `/report https://apple.com/tw/back-to-school`")
             return
         }
         const result = await isBTS(url)
@@ -57,7 +62,11 @@ async function listen() {
 
     bot.onText(/\/start/g, (msg, match) => {
         const chatId = msg.chat.id
-        bot.sendMessage(chatId, "歡迎使用BTSNotify，有任何問題請輸入 /help 此BOT不會主動推播BTS相關訊息請加入群組\n https://t.me/joinchat/jASua81VujIxYmE1")
+        bot.sendMessage(chatId, "歡迎使用BTSNotify，有任何問題請輸入 /help\n" +
+            "此BOT不會主動推播\n" +
+            `接收BTS推播請加入頻道\n${CHANNEL_URL}\n` +
+            `有建議? 有問題? 有疑問? 加入討論組解決你的問題吧!! ${GROUP_URL}`
+        )
     })
 
     // bot.on("message", (msg) => {
@@ -74,9 +83,9 @@ async function listen() {
     // })
 }
 
-export function pushMessageToGroup(message: string) {
+export function pushMessageToChannel(message: string) {
     const bot = getBot()
-    return bot.sendMessage(GROUP, message)
+    return bot.sendMessage(CHANNEL_ID, message)
 }
 
 // export function sendMessage(chatId: string, message: string) {
