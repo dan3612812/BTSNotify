@@ -36,3 +36,37 @@ export function siteMapData() {
             }
         })
 }
+
+
+/**
+ * 在 https://www.apple.com/us-hed/shop/back-to-school 是否其他link
+ * 其中包含 hreflang 是指 tw的
+ * @returns url
+ */
+export async function BTSHasTwHreflang(): Promise<false | string> {
+    interface LinkRelTagAttribs {
+        hreflang?: string // null ,en-ca
+        href?: string // https://www.apple.com/us-hed/shop/back-to-school ,https://www.apple.com/ca_edu_93120/shop/back-to-school
+        rel?: "canonical" | "alternate" | string // canonical ,alternate
+    }
+    const TWHreflangRegex = new RegExp(/zh-TW/gi)
+    const canonicalUrl = "https://www.apple.com/us-hed/shop/back-to-school"
+    return axios.get(canonicalUrl)
+        .then(({ data }: { data: string }) => {
+            const temp = data.replace(/\n/g, "")
+            const $ = load(temp)
+            const selector = `head`
+            const headLinks = $(selector).find("link")
+            for (let tag of headLinks) {
+                const { rel, href, hreflang } = tag.attribs as LinkRelTagAttribs
+                // 是重新導向的link
+                if (rel === "alternate") {
+                    if (href !== undefined && TWHreflangRegex.test(hreflang ? hreflang : "")) {
+                        //上架拉
+                        return href
+                    }
+                }
+            }
+            return false
+        })
+}
