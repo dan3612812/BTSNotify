@@ -1,17 +1,13 @@
-import moment from "moment"
 import { siteMapData, redirectToBTS, BTSHasTwHreflang } from "./core"
 import { hasBTSContext, isBTSUrl } from "../lib"
-import { pushMessageToChannel } from "../notify/telegram"
+import { judgmentSendMessage, updateLastCheckDate } from "../service"
 
 const TIMEOUT = 5 * 1000 // 5000 ms
 
-export let BTSing = false
-export let lastCheckDate = "0000/00/00 00:00:00.000"
-
 export async function init() {
     const timer = setInterval(async () => {
-        lastCheckDate = moment().format("YYYY/MM/DD HH:mm:ss.SSS")
-        console.log(lastCheckDate)
+        // 刷新 最後更新時間
+        console.log(updateLastCheckDate())
 
         // 判斷方式一
         const m1 = isBTSInSitemap()
@@ -58,27 +54,9 @@ export async function isBTSHasTwHreflang(): Promise<false | string> {
 }
 
 /**
- * 統一發送 降低重複發送問題 且網址必須存在
- * @param url 
- * @returns true 已發送 false未發送
+ * 用於測試
+ * @returns 
  */
-async function judgmentSendMessage(result: Promise<string | false>): Promise<boolean> {
-    const url = await result
-    if (url) {
-        if (BTSing === false) {
-            pushMessageToChannel(makeMessage(url))
-            BTSing = true
-            return true
-        }
-    }
-    return false
-}
-
-function makeMessage(url: string): string {
-    const message = `Apple Back to School 終於開始拉!!!! 快點以下網址前往\n ${url}`
-    return message
-}
-
 async function fakeTrue(): Promise<string | false> {
     return "[TEST] https://www.apple.com/tw/TESTTESTTEST"
 }

@@ -25,7 +25,6 @@ export function hasBTSContext(str: string) {
 }
 
 export function isTwUrl(url: string) {
-    // TODO 將跟URL 判斷有關的加入這段
     const regex = new RegExp(/apple\.com\/tw.+/gi)
     return regex.test(url)
 }
