@@ -33,7 +33,7 @@ async function listen() {
     bot.onText(/\/help/g, (msg, match) => {
         const chatId = msg.chat.id
         //TODO 修改底下的說明
-        bot.sendMessage(chatId, "還沒寫好啦 在等等...\n" + `有建議? 有問題? 有疑問? 加入討論組解決你的問題吧!!\n${GROUP_URL}`)
+        bot.sendMessage(chatId, "還沒寫好啦 再等等...\n" + `有建議? 有問題? 有疑問? 加入討論組解決你的問題吧!!\n${GROUP_URL}`)
     })
     bot.onText(/\/status/g, (msg, match) => {
         const chatId = msg.chat.id
