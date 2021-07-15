@@ -14,6 +14,8 @@ export async function init() {
         // 判斷是否傳送訊息
         judgmentSendMessage(m1).then(res => {
             if (res === true) clearInterval(timer)
+        }).catch(err => {
+            console.log("[Error] method 1 ", err)
         })
 
         // 判斷方式二
@@ -21,6 +23,8 @@ export async function init() {
         // 判斷是否傳送訊息
         judgmentSendMessage(m2).then(res => {
             if (res === true) clearInterval(timer)
+        }).catch(err => {
+            console.log("[Error] method 2 ", err)
         })
 
         // 判斷方式三
@@ -28,6 +32,8 @@ export async function init() {
         // 判斷是否傳送訊息
         judgmentSendMessage(m3).then(res => {
             if (res === true) clearInterval(timer)
+        }).catch(err => {
+            console.log("[Error] method 3 ", err)
         })
 
     }, TIMEOUT)
