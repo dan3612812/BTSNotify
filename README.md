@@ -32,3 +32,7 @@ https://t.me/joinchat/jASua81VujIxYmE1
 
 # 問題回報
 要回報去github回報
+
+
+# 相關細節
+當[教育商店網址](https://apple.com/tw-edu/shop)進入到更新時，此時 http code 為503
