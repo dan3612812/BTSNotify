@@ -10,11 +10,11 @@ export let lastCheckDate = "0000/00/00 00:00:00.000"
 * @param url 
 * @returns true 已發送 false未發送
 */
-export async function judgmentSendMessage(result: Promise<string | false> | string): Promise<boolean> {
+export async function judgmentSendMessage(result: Promise<string | false> | string, type: "pre" | "start"): Promise<boolean> {
     const url = await result
     if (url) {
         if (BTSing === false) {
-            pushMessageToChannel(makeMessage(url))
+            pushMessageToChannel(makeMessage(url, type))
             setBTSing(true)
             return true
         }

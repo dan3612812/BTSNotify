@@ -3,6 +3,24 @@ import axios from "axios"
 import { without, isString } from "lodash"
 
 
+export async function preBTS(): Promise<string | false> {
+    // 在BTS方案開始之前 會有一個網站更新的資訊
+    // 根據2021年的資料 `https://apple.com/tw-edu/shop`該網址的 http status 會改為503
+    // 以及網頁的text會出現 `我們正在更新 Apple Store，請稍後再來。`
+    const url = `https://apple.com/tw-edu/shop`
+    return axios.get(url).then(res => {
+        // if (res.status ===503){       }
+        const $ = load(res.data)
+        const t = $("body *").text()
+        if (t.includes("我們正在更新")) {
+            return url
+        } else {
+            return false
+        }
+    })
+}
+
+
 export async function redirectToBTS(): Promise<string> {
     const url = "https://apple.com/tw/shop/goto/educationrouting"
     return axios.get(url).then(res => {

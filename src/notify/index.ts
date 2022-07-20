@@ -1,16 +1,16 @@
-process.env["NTBA_FIX_319"] = "1";
 import TelegramBot from "node-telegram-bot-api"
 import { listen } from "./listen"
-
-const TOKEN = process.env.TELEGRAM_TOKEN as string
-// const GROUP = process.env.TELEGRAM_GROUP as string
-const CHANNEL_ID = process.env.TELEGRAM_CHANNEL as string
 
 let bot: TelegramBot | undefined
 
 export async function init() {
+    const TOKEN = process.env.TELEGRAM_TOKEN as string
     bot = new TelegramBot(TOKEN, { polling: true })
     listen(bot)
+    // listen bot error event
+    // bot.on("polling_error", err => { 
+
+    // })
 }
 
 function getBot(): TelegramBot {
@@ -23,6 +23,7 @@ function getBot(): TelegramBot {
 }
 
 export function pushMessageToChannel(message: string) {
+    const CHANNEL_ID = process.env.TELEGRAM_CHANNEL as string
     const bot = getBot()
     return bot.sendMessage(CHANNEL_ID, message)
 }
