@@ -44,8 +44,8 @@ export async function listen(bot: TelegramBot) {
     bot.onText(/\/start/g, (msg, match) => {
         const chatId = msg.chat.id
         bot.sendMessage(chatId, "歡迎使用BTSNotify，有任何問題請輸入 /help\n" +
-            "此BOT不會主動推播\n" +
-            `接收BTS推播請加入頻道\n${CHANNEL_URL}\n` +
+            "此BOT不會主動推播BTS訊息\n" +
+            `要接收BTS推播請加入頻道\n${CHANNEL_URL}\n` +
             `有建議? 有問題? 有疑問? 加入討論組解決你的問題吧!! ${GROUP_URL}`
         )
     })
