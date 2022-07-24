@@ -64,11 +64,11 @@ export function siteMapData() {
 export async function BTSHasTwHreflang(): Promise<false | string> {
     interface LinkRelTagAttribs {
         hreflang?: string // null ,en-ca
-        href?: string // https://www.apple.com/us-hed/shop/back-to-school ,https://www.apple.com/ca_edu_93120/shop/back-to-school
+        href?: string // https://www.apple.com/us-edu/shop/back-to-school ,https://www.apple.com/ca_edu_93120/shop/back-to-school
         rel?: "canonical" | "alternate" | string // canonical ,alternate
     }
     const TWHreflangRegex = new RegExp(/zh-TW/gi)
-    const canonicalUrl = "https://www.apple.com/us-hed/shop/back-to-school"
+    const canonicalUrl = "https://www.apple.com/us-edu/shop/back-to-school"
     return axios.get(canonicalUrl)
         .then(({ data }: { data: string }) => {
             const temp = data.replace(/\n/g, "")
