@@ -2,6 +2,8 @@ import { load } from "cheerio"
 import axios from "axios"
 import { without, isString } from "lodash"
 
+// TODO 將判斷式與輸入的資料拆開用於方便後面的test
+
 
 export async function preBTS(): Promise<string | false> {
     // 在BTS方案開始之前 會有一個網站更新的資訊
@@ -20,7 +22,10 @@ export async function preBTS(): Promise<string | false> {
     })
 }
 
-
+/**
+ * @deprecated
+ * @returns 
+ */
 export async function redirectToBTS(): Promise<string> {
     const url = "https://apple.com/tw/shop/goto/educationrouting"
     return axios.get(url).then(res => {

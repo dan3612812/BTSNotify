@@ -3,6 +3,7 @@ import { hasBTSContext, isBTSUrl } from "../lib"
 import { judgmentSendMessage, updateLastCheckDate } from "../service"
 
 const TIMEOUT = 5 * 1000 // 5000 ms
+
 // TODO 將 preBTS 加入timer內
 function taskSchedule(){
 

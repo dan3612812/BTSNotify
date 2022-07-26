@@ -2,6 +2,7 @@ import moment from "moment"
 import { pushMessageToChannel } from "../notify"
 import { makeMessage } from "../lib"
 
+//TODO 新增近資料庫
 export let BTSing = false
 export let lastCheckDate = "0000/00/00 00:00:00.000"
 
