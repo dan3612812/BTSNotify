@@ -2,6 +2,9 @@ import { load } from "cheerio"
 import axios from "axios"
 import { without, isString } from "lodash"
 
+// 台灣BTS方案網址
+// https://www.apple.com/tw-edu/shop/back-to-school
+
 /**
  * 取得正在升級的網頁內容
  * @returns 網頁的html資料
